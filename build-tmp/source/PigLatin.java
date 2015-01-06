@@ -1,4 +1,22 @@
-import java.util.*;
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class PigLatin extends PApplet {
+
+
 
 public void setup() {
 	String lines[] = loadStrings("words.txt");
@@ -11,6 +29,8 @@ public void draw()
 {
 }
 public int findFirstVowel(String sWord)
+//precondition: sWord is a valid String of length greater than 0.
+//postcondition: returns the position of the first vowel in sWord.  If there are no vowels, returns -1
 {
 	if(sWord.length() > 0)
 	{
@@ -31,6 +51,8 @@ public int findFirstVowel(String sWord)
 }
 
 public String pigLatin(String sWord)
+//precondition: sWord is a valid String of length greater than 0
+//postcondition: returns the pig latin equivalent of sWord
 {
 	if(findFirstVowel(sWord) == -1)
 	{
@@ -51,4 +73,13 @@ public String pigLatin(String sWord)
 			return sWord.substring(findFirstVowel(sWord), sWord.length()) + sWord.substring(0,findFirstVowel(sWord)) + "ay";
 		}
 	}
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "PigLatin" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }
